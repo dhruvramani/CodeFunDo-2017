@@ -4,7 +4,7 @@
     <header class="intro-header">
         <div class="container">
           <div class="intro-message">
-            <h2  id="intro-name">Lift</h2>
+            <h2 id="intro-name">Lift</h2>
             <h3>You don't have to lift to fly!</h3>
             <hr class="intro-divider">
             <h4>Read the instructions <a href='#about'>below</a>!</h4>
@@ -15,6 +15,7 @@
                   <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
                     <p>Upload Image 1 : <input type='file' name='file1' class="form-control"></p>
                     <p>Upload Image 2 : <input type='file' name='file2' class="form-control"></p>
+                    <input type="submit" class='btn btn-success'>
                   </form>
                 </a>
               </li>
