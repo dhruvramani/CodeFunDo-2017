@@ -7,10 +7,12 @@
           <h2  id="intro-name">Lift</h2>
           <hr class="intro-divider">
           <small style="visibility: hidden;"id='org_val'>{{weight}}</small>
-          <h1 style="font-weight: lighter;"><span id='weight'>{{ weight }}</span>Kg</h1>
+          <h2 style="font-weight: lighter;">Your Package Weighs</h2>
+          <h1 style="font-weight: lighter;"><span id='weight'>{{ weight }}</span> &nbsp;Kg</h1>
             <div id="slidecontainer">
                 <span>Percentage Filled (0-100%): </span> 
                 <span id="wout" style="font-weight:bold; color:white"></span>
+                <br><br>
                 <input type="range" min="1" max="100" value="100" class="slider" id="range">
             </div>
         </div>
@@ -28,7 +30,7 @@
 
         slider.oninput = function() {
           percentage.innerHTML = parseFloat(slider.value) / 100.;
-          weight.innerHTML = parseFloat(org_val.innerHTML) * parseFloat(percentage.innerHTML);
+          weight.innerHTML = (parseFloat(org_val.innerHTML) * parseFloat(percentage.innerHTML)).toFixed(2);
         }
     </script>
 
