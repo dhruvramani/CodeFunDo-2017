@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+{% block mainBlock %}
+
+    <header class="intro-header">
+        <div class="container">
+          <div class="intro-message">
+            <h2  id="intro-name">Lift</h2>
+            <h3>You don't have to lift to fly!</h3>
+            <hr class="intro-divider">
+            <h4>Read the instructions <a href='#about'>below</a>!</h4>
+            <ul class="list-inline intro-social-buttons">
+              <li class="list-inline-item">
+                <a href="#" class="btn btn-secondary btn-lg">
+                  <i class="fa fa-file" aria-hidden="true"></i>
+                  <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                    <p>Upload Image 1 : <input type='file' name='file1' class="form-control"></p>
+                    <p>Upload Image 2 : <input type='file' name='file2' class="form-control"></p>
+                  </form>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </header>
+
+    <section class="content-section-a" id='about'>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 ml-auto">
+            <hr class="section-heading-spacer">
+            <div class="clearfix"></div>
+            <h2 class="section-heading">How to use?!<br></h2>
+            <p class="lead">Just click photos of the object from two directions, choose options, and DONE!</p>
+          </div>
+          <div class="col-lg-5 mr-auto">
+            <img class="img-fluid" src="img/boxescom.jpeg" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

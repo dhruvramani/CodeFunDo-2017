@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% block mainBlock %}
+
+    <header class="intro-header">
+      <div class="container">
+        <div class="intro-message">
+          <h2  id="intro-name">Lift</h2>
+          <hr class="intro-divider">
+          <small style="visibility: hidden;" id='org_val'>{{weight}}</small>
+          <h1 id='weight'>{{ weight }}</h1>
+            <div id="slidecontainer">
+                <span>Percentage Filled (0-100%)</span> 
+                <span id="wout" style="font-weight:bold; color:white"></span>
+                <input type="range" min="1" max="100" value="50" class="slider" id="range">
+            </div>
+        </div>
+      </div>
+    </header>
+
+    <script>
+        var slider = document.getElementById("range");
+        var percentage = document.getElementById("wout");
+        var org_val = document.getElementById("org_val");
+        var weight = document.getElementById("weight");
+        percentage.innerHTML = parseFloat(slider.value) / 100.;
+        weight.innerHTML = parseFloat(org_val.innerHTML) * parseFloat(percentage.innerHTML);
+
+        slider.oninput = function() {
+          output.innerHTML = this.value;
+        }
+    </script>
+
+{% endblock %}
