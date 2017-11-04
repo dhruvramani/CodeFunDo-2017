@@ -67,18 +67,8 @@ def object_size(filepath, left_width=21):
         dimA = dA / pixelsPerMetric
         dimB = dB / pixelsPerMetric
 
-        cv2.putText(orig, "{:.1f}cm".format(dimA), (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
-        cv2.putText(orig, "{:.1f}cm".format(dimB), (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
- 
-	# show the output image
-        cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-        cv2.resizeWindow('image', 600,600)
-        cv2.imshow("image", orig)
-        cv2.waitKey(0)
-
         dimensions.append((dimA, dimB))
-    # Returns a list of dimensions, each dimension for each object.
-    # ie. dimensions of many objects
+
     max_dim = [-1, -1]
     for dims in dimensions:
         if(dims[0] > max_dim[0] and dims[1] > max_dim[1]):
