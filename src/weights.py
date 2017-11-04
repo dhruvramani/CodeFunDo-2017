@@ -9,14 +9,19 @@ from scipy.spatial import distance as dist
 def midpoint(ptA, ptB):
     return ((ptA[0] + ptB[0]) * 0.5, (ptA[1] + ptB[1]) * 0.5)
 
-# NOTE: Wrong!!
 def min_dif(list1, list2):    
-    return [list1[0], list1[1], list2[0]] # TODO : Changes this!
+    min_d, ind = 1000000, -1
+    for i in list1:
+        for j in list2:
+             if(i-j < min_d):
+                 ind = j
+                 min_d = i-j
+    return ind
 
 def object_size(filepath, left_width):
-    image = cv2.imread(filepath)
-    gray  = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    gray  = cv2.GaussianBlur(gray, (7, 7), 0)
+    image = cv2.imread(filepath, 0)
+    #gray  = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray  = cv2.GaussianBlur(image, (7, 7), 0)
     
     edged = cv2.Canny(gray, 50, 100)
     edged = cv2.dilate(edged, None, iterations=1)
@@ -30,7 +35,7 @@ def object_size(filepath, left_width):
 
     dimensions = list()
     for c in cnts:
-        if cv2.contourArea(c) < 100:
+        if cv2.contourArea(c) < 1000:
             continue
         orig = image.copy()
         box = cv2.minAreaRect(c)
@@ -44,6 +49,15 @@ def object_size(filepath, left_width):
         (tlblX, tlblY) = midpoint(tl, bl)
         (trbrX, trbrY) = midpoint(tr, br)
 
+        cv2.circle(orig, (int(tltrX), int(tltrY)), 5, (255, 0, 0), -1)
+        cv2.circle(orig, (int(blbrX), int(blbrY)), 5, (255, 0, 0), -1)
+        cv2.circle(orig, (int(tlblX), int(tlblY)), 5, (255, 0, 0), -1)
+        cv2.circle(orig, (int(trbrX), int(trbrY)), 5, (255, 0, 0), -1)
+ 
+        # draw lines between the midpoints
+        cv2.line(orig, (int(tltrX), int(tltrY)), (int(blbrX), int(blbrY)), (255, 0, 255), 2)
+        cv2.line(orig, (int(tlblX), int(tlblY)), (int(trbrX), int(trbrY)), (255, 0, 255), 2)
+
         dA = dist.euclidean((tltrX, tltrY), (blbrX, blbrY))
         dB = dist.euclidean((tlblX, tlblY), (trbrX, trbrY))
 
@@ -53,14 +67,28 @@ def object_size(filepath, left_width):
         dimA = dA / pixelsPerMetric
         dimB = dB / pixelsPerMetric
 
+        cv2.putText(orig, "{:.1f}in".format(dimA), (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
+        cv2.putText(orig, "{:.1f}in".format(dimB), (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
+ 
+	# show the output image
+        cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+        cv2.resizeWindow('image', 300,300)
+        cv2.imshow("image", orig)
+        cv2.waitKey(0)
+
         dimensions.append((dimA, dimB))
     # Returns a list of dimensions, each dimension for each object.
     # ie. dimensions of many objects
-    return dimensions
+    max_dim = [-1, -1]
+    for dims in dimensions:
+        if(dims[0] > max_dim[0] and dims[1] > max_dim[1]):
+            max_dim[0] = dims[0]
+            max_dim[1] = dims[1]
+    return max_dim
 
-def weight(file1, left_width, const_div=10.0): # left_width = A4 Size
+def weight(file1, file2, left_width, const_div=5000.0): # left_width = A4 Size
     size1 = object_size(file1, left_width)
-    #size2 = object_size(file2, left_width)
-    #sizes = min_dif(size1, size2)
-    weights = [i[0] * i[1] / const_div for i in size1]
-    return weights
+    size2 = object_size(file2, left_width)
+    rem_ind = min_dif(size1, size2)
+    weight = (size1[0] * size1[1] * size2[1-rem_ind]) / const_div
+    return weight
