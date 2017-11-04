@@ -5,16 +5,16 @@
         <div class="container">
           <div class="intro-message">
             <h1 id="intro-name" style="font-size: 4em;">Lift</h1>
-            <h3>You don't have to lift to fly!</h3>
+            <h3 style="font-weight: lighter;">You don't have to lift to fly!</h3>
             <hr class="intro-divider">
-            <h4>Read the instructions <a href='#about'>below</a>!</h4>
+            <h4 style="font-weight: lighter;">Read the instructions <a href='#about'>below</a>!</h4>
             <ul class="list-inline intro-social-buttons">
               <li class="list-inline-item">
                   <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
-                    <p><i class="fa fa-file" aria-hidden="true"></i> Upload Image 1 : <input type='file' name='file1' class="form-control"></p>
-                    <p><i class="fa fa-file" aria-hidden="true"></i>Upload Image 2 : <input type='file' name='file2' class="form-control"></p>
+                    <p><i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp;Upload Image 1 : <input type='file' name='file1' class="form-control"></p>
+                    <p><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Upload Image 2 : <input type='file' name='file2' class="form-control"></p>
                     <br>
-                    <input type="submit" class='btn btn-success btn-block' value='Submit' style="background-color: color: RGBA(0, 168, 122, 1.00);">
+                    <input type="submit" class='btn btn-success btn-block' value='Submit' style="background-color: RGBA(0, 168, 122, 1.00); font-weight: bold;">
                   </form>
               </li>
             </ul>
