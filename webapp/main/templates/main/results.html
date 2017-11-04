@@ -22,11 +22,10 @@
         var percentage = document.getElementById("wout");
         var org_val = document.getElementById("org_val");
         var weight = document.getElementById("weight");
-        percentage.innerHTML = parseFloat(slider.value) / 100.;
-        weight.innerHTML = parseFloat(org_val.innerHTML) * parseFloat(percentage.innerHTML);
 
         slider.oninput = function() {
-          output.innerHTML = this.value;
+          percentage.innerHTML = parseFloat(slider.value) / 100.;
+          weight.innerHTML = parseFloat(org_val.innerHTML) * parseFloat(percentage.innerHTML);
         }
     </script>
 
