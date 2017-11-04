@@ -11,14 +11,14 @@ def midpoint(ptA, ptB):
 
 def min_dif(list1, list2):    
     min_d, ind = 1000000, -1
-    for i in list1:
-        for j in list2:
-             if(i-j < min_d):
+    for i in range(0, len(list1)):
+        for j in range(0, len(list2)):
+             if(list1[i]-list2[j] < min_d):
                  ind = j
-                 min_d = i-j
+                 min_d = list1[i]-list2[j]
     return ind
 
-def object_size(filepath, left_width):
+def object_size(filepath, left_width=21):
     image = cv2.imread(filepath, 0)
     #gray  = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     gray  = cv2.GaussianBlur(image, (7, 7), 0)
@@ -35,7 +35,7 @@ def object_size(filepath, left_width):
 
     dimensions = list()
     for c in cnts:
-        if cv2.contourArea(c) < 1000:
+        if cv2.contourArea(c) < 100:
             continue
         orig = image.copy()
         box = cv2.minAreaRect(c)
@@ -67,12 +67,12 @@ def object_size(filepath, left_width):
         dimA = dA / pixelsPerMetric
         dimB = dB / pixelsPerMetric
 
-        cv2.putText(orig, "{:.1f}in".format(dimA), (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
-        cv2.putText(orig, "{:.1f}in".format(dimB), (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
+        cv2.putText(orig, "{:.1f}cm".format(dimA), (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
+        cv2.putText(orig, "{:.1f}cm".format(dimB), (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
  
 	# show the output image
         cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-        cv2.resizeWindow('image', 300,300)
+        cv2.resizeWindow('image', 600,600)
         cv2.imshow("image", orig)
         cv2.waitKey(0)
 
@@ -86,7 +86,7 @@ def object_size(filepath, left_width):
             max_dim[1] = dims[1]
     return max_dim
 
-def weight(file1, file2, left_width, const_div=5000.0): # left_width = A4 Size
+def weight(file1, file2, left_width=21, const_div=6000.0): # left_width = A4 Size
     size1 = object_size(file1, left_width)
     size2 = object_size(file2, left_width)
     rem_ind = min_dif(size1, size2)
