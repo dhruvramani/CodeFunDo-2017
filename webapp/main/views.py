@@ -17,7 +17,7 @@ def index(request):
             paths.append("{}/data/{}".format(BASE_DIR, fileObj.name))
             fileObj.save()
         weigh = weight(paths[0], paths[1])
-        return render(request,'main/results.html', {"weight" : weigh})
+        return render(request,'main/results.html', {"weight" : "%.2f" % weigh})
 
     if request.method == 'GET':
         return render(request,'main/index.html', None)

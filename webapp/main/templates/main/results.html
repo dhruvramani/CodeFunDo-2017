@@ -6,18 +6,21 @@
         <div class="intro-message">
           <h2  id="intro-name">Lift</h2>
           <hr class="intro-divider">
-          <small style="visibility: hidden;" id='org_val'>{{weight}}</small>
-          <h1 id='weight'>{{ weight }}</h1>
+          <small style="visibility: hidden;"id='org_val'>{{weight}}</small>
+          <h1 style="font-weight: lighter;"><span id='weight'>{{ weight }}</span>Kg</h1>
             <div id="slidecontainer">
-                <span>Percentage Filled (0-100%)</span> 
+                <span>Percentage Filled (0-100%): </span> 
                 <span id="wout" style="font-weight:bold; color:white"></span>
-                <input type="range" min="1" max="100" value="50" class="slider" id="range">
+                <input type="range" min="1" max="100" value="100" class="slider" id="range">
             </div>
         </div>
       </div>
     </header>
 
     <script>
+        (function() {
+
+        });
         var slider = document.getElementById("range");
         var percentage = document.getElementById("wout");
         var org_val = document.getElementById("org_val");

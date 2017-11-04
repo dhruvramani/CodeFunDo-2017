@@ -17,6 +17,7 @@ body, h1, h2, h3, h4, h5, h6 {
 
 #intro-name{
     font-family: 'Monoton', cursive;
+    font-size: 4em;
     color: RGBA(0, 168, 122, 1.00);
 }
 
