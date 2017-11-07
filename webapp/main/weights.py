@@ -67,7 +67,8 @@ def object_size(filepath, left_width=21):
         dimA = dA / pixelsPerMetric
         dimB = dB / pixelsPerMetric
 
-        dimensions.append((dimA, dimB))
+        if(left_width not in [dimA, dimB]):
+            dimensions.append((dimA, dimB))
 
     max_dim = [-1, -1]
     for dims in dimensions:

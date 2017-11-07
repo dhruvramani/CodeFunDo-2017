@@ -5,13 +5,13 @@
         <div class="container">
           <div class="intro-message">
             <h1 id="intro-name">Lift</h1>
-            <h3 style="font-weight: lighter;">You don't have to lift to fly!</h3>
+            <h3 style="font-weight: lighter;">Your light weight, weight calculator!</h3>
             <hr class="intro-divider">
             <ul class="list-inline intro-social-buttons">
               <li class="list-inline-item">
                   <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
-                    <p><i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp;Upload Image 1 : <input type='file' name='file1' class="form-control"></p>
-                    <p><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Upload Image 2 : <input type='file' name='file2' class="form-control"></p>
+                    <p><i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp;Upload Image 1 <input type='file' name='file1' class="form-control"></p>
+                    <p><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Upload Image 2 <input type='file' name='file2' class="form-control"></p>
                     <br>
                     <input type="submit" class='btn btn-success btn-block' value='Submit' style="background-color: RGBA(0, 168, 122, 1.00); font-weight: bold;">
                   </form>
@@ -33,7 +33,7 @@
                 <li>Make sure the background you are uploading photos on, is plain. Textured and multicoloured backgrounds can lead to erraneous results.</li>
                 <li>Keep an A4 sized paper on the leftmost side (for comparison), and click the photo of the luggage from the top (90 degrees).</li>
                 <li>Now click the photo of the object from the side, again keeping an A4 size paper with it (leftmost side of the photo) for comparison.</li>
-                <li>Upload the two photos, and click on the Submit button. </li>
+                <li>Upload the two photos, and click on the Submit button.</li>
             </ol>
           </div>
           <div class="col-lg-5 mr-auto">
