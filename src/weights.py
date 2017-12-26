@@ -67,6 +67,13 @@ def object_size(filepath, left_width=21):
         dimA = dA / pixelsPerMetric
         dimB = dB / pixelsPerMetric
 
+        cv2.putText(orig, "{:.1f}in".format(dimA), (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
+        cv2.putText(orig, "{:.1f}in".format(dimB), (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
+        cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+        cv2.resizeWindow('image', 300,300)
+        cv2.imshow("image", orig)
+        cv2.waitKey(0)
+
         dimensions.append((dimA, dimB))
 
     max_dim = [-1, -1]
