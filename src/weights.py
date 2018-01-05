@@ -78,7 +78,7 @@ def object_size(filepath, left_width=21):
 
     max_dim = [-1, -1]
     for dims in dimensions:
-        if(dims[0] > max_dim[0] and dims[1] > max_dim[1]):
+        if(dims[0] * dims[1] > max_dim[0] * max_dim[1] and 21 not in dims):
             max_dim[0] = dims[0]
             max_dim[1] = dims[1]
     return max_dim

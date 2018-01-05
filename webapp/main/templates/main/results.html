@@ -1,37 +1,166 @@
-{% extends 'main/base.html' %}
-{% block mainBlock %}
+{% extends 'main/base.html' %} {% block mainBlock %}
 
-    <header class="intro-header">
-      <div class="container">
-        <div class="intro-message">
-          <h2  id="intro-name">Lift</h2>
-          <hr class="intro-divider">
-          <small style="visibility: hidden;"id='org_val'>{{weight}}</small>
-          <h2 style="font-weight: lighter;">Your Package Weighs</h2>
-          <h1 style="font-weight: lighter;"><span id='weight'>{{ weight }}</span> &nbsp;Kg</h1>
-            <div id="slidecontainer">
-                <span>Percentage Filled (0-100%): </span> 
-                <span id="wout" style="font-weight:bold; color:white"></span>
-                <br><br>
-                <input type="range" min="1" max="100" value="100" class="slider" id="range">
+<header class="intro-header">
+  <div class="container">
+    <div class="intro-message">
+      <h2 id="intro-name">Lift</h2>
+      <hr class="intro-divider">
+      <small style="visibility: hidden;" id='org_val'>{{weight}}</small>
+      <h2 style="font-weight: lighter;">Your Package Weighs</h2>
+      <h1 style="font-weight: lighter;"><span id='weight'>{{ weight }}</span> &nbsp;Kg</h1>
+      
+      <div class="radio-button-group">
+        <div class="radio-tile-group container">
+      
+          <div class="input-container">
+            <input id="light" class="radio-button" type="radio" name="radio" onclick="modify_weight('light');">
+            <div class="radio-tile">
+              <label class="radio-tile-label">Light</label>
             </div>
+          </div>
+      
+          <div class="input-container">
+            <input id="medium" class="radio-button" type="radio" name="radio" onclick="modify_weight('medium');">
+            <div class="radio-tile">
+              <label class="radio-tile-label">Medium</label>
+            </div>
+          </div>
+      
+          <div class="input-container">
+            <input id="heavy" class="radio-button" type="radio" name="radio" onclick="modify_weight('heavy');">
+            <div class="radio-tile">
+              <label class="radio-tile-label">Heavy</label>
+            </div>
+          </div>
+      
         </div>
       </div>
-    </header>
 
-    <script>
-        (function() {
+      <div id="slidecontainer">
+        <span>Percentage Filled (0-100%): </span>
+        <span id="wout" style="font-weight:bold; color:white"></span>
+        <br><br>
+        <input type="range" min="1" max="100" value="100" class="slider" id="range">
+      </div>
+    </div>
+  </div>
+</header>
 
-        });
-        var slider = document.getElementById("range");
-        var percentage = document.getElementById("wout");
-        var org_val = document.getElementById("org_val");
-        var weight = document.getElementById("weight");
+<style>
 
-        slider.oninput = function() {
-          percentage.innerHTML = parseFloat(slider.value) / 100.;
-          weight.innerHTML = (parseFloat(org_val.innerHTML) * parseFloat(percentage.innerHTML)).toFixed(2);
-        }
-    </script>
+* {
+  box-sizing: border-box;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+
+.radio-button-group > .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.radio-tile-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+ } 
+ .radio-tile-group >  .input-container {
+    position: relative;
+    height:  3rem;
+    width:  7rem;
+    margin: 0.5rem;
+
+  }
+
+  .input-container > .radio-button {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      cursor: pointer;
+    }
+
+   .input-container > .radio-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      border: 2px solid RGBA(0, 168, 122, 1.00);
+      border-radius: 5px;
+      padding: 1rem;
+      transition: transform 300ms ease;
+    }
+
+   .input-container > .radio-tile-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: RGBA(0, 168, 122, 1.00);
+    }
+
+    .radio-button:checked + .radio-tile {
+      background-color: RGBA(0, 168, 122, 1.00);
+      border: 2px solid RGBA(0, 168, 122, 1.00);
+      color: white;
+      transform: scale(1.1, 1.1);
+      
+    }
+      
+    .radio-button:checked + .radio-tile  >  .icon svg {
+        fill: white;
+        background-color: RGBA(0, 168, 122, 1.00);
+      }
+     .radio-button:checked + .radio-tile > .radio-tile-label {
+        color: white;
+        background-color: RGBA(0, 168, 122, 1.00);
+      }
+  
+}
+
+</style>
+
+<script>
+  (function() {
+
+  });
+  _MEDIUM = 1;
+  _LIGHT = 1
+  _LOW = 1;
+  var slider = document.getElementById("range");
+  var percentage = document.getElementById("wout");
+  var org_val = document.getElementById("org_val");
+  var weight = document.getElementById("weight");
+
+  slider.oninput = function() {
+    percentage.innerHTML = parseFloat(slider.value) / 100.;
+    weight.innerHTML = (parseFloat(org_val.innerHTML) * parseFloat(percentage.innerHTML)).toFixed(2);
+  }
+
+  function modify_weight(wtype) {
+
+    switch(wtype)
+    {
+        case 'medium':
+          weight.innerHTML = (parseFloat(org_val.innerHTML) * _MEDIUM).toFixed(2);
+          break;
+        case 'light':
+          weight.innerHTML = (parseFloat(org_val.innerHTML) * _LIGHT).toFixed(2);
+          break;
+        case 'hard':
+          weight.innerHTML = (parseFloat(org_val.innerHTML) * _HARD).toFixed(2);
+          break;
+    }
+  }
+</script>
 
 {% endblock %}
