@@ -30,9 +30,9 @@
             
             function screenshot()
             {
-                alert("screenshot");
-            
+                    alert("screenshot");
                     var canvas = document.getElementById('viewport');
+                    alert("canvas created");
                     context = canvas.getContext('2d');
                     context.drawImage(video, 0, 0, 300, 300, 0, 0, 300, 300);
                     alert("canvas done");
