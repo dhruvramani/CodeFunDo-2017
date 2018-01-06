@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.static import serve
 from django.shortcuts import render, redirect, get_object_or_404
 
-BASE_DIR = os.path.dirname((os.path.dirname(os.path.abspath(_file_))))
+BASE_DIR = os.path.dirname((os.path.dirname(os.path.abspath(__file__))))
 
 def index(request):
     if request.method == 'POST':
