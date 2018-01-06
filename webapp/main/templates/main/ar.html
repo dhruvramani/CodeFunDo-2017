@@ -7,10 +7,12 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> 
+        <script src="https://raw.githubusercontent.com/jhuckaby/webcamjs/master/webcam.min.js"></script>
         <script type="text/javascript">
-            /*
+            
             var count = 0;
             var file1 = null;
+            Webcam.attach(document.getElementById("my_camera"));
             function get_weight() {
                 var element = document.getElementById("ar_text");
                 element.setAttribute("visible", "false");
@@ -24,29 +26,28 @@
             
             function screenshot()
             {
-                html2canvas(document.body).then(function(canvas) {
-                    document.body.appendChild(canvas);
-                    var url = canvas.toDataURL();
-                    var blobBin = atob(dataURL.split(',')[1]);
-                    var array = [];
-                    for(var i = 0; i < blobBin.length; i++) {
-                        array.push(blobBin.charCodeAt(i));
+                alert("screenshot");
+                Webcam.snap(function(data_url) {
+                    alert("snap");
+                    var canvas = document.getElementById('viewport'),
+                    context = canvas.getContext('2d');
+                    base_image = new Image();
+                    base_image.src = data_url;
+                    base_image.onload = function(){
+                            context.drawImage(base_image, base_image.width, base_image.height);
                     }
-                    var file = new Blob([new Uint8Array(array)], {type: 'image/png'});
+                    var url = canvas.toDataURL();
                     if(window.count == 0)
                     {
-                        window.file1 = file;
+                        window.file1 = url;
                         window.count++;
                         return;
                     } else {
-                        var formdata = new FormData();
-                        formdata.append("file2", file);
-                        formdata.append("file1", file1);
                         alert("hello");
                         $.ajax({
                             url: "http://52.230.83.128",
                             type: "POST",
-                            data: formdata,
+                            data: {file1 : file1, file2 : url},
                             processData: false,
                             contentType: false,
                         }).done(function(respond){
@@ -56,8 +57,8 @@
                         window.count = 0;
                     }
                 });
-            } */
-            
+            } 
+            /*
             function takeScreenshot() {
                 var w = window.open('', '');
                 w.document.title = "Screenshot";
@@ -96,7 +97,7 @@
                     };
                     images[src].src = sources[src];
                 }
-            } 
+            }  */
         </script> 
     </head>
 
@@ -108,6 +109,7 @@
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
-        <canvas width='640' height='480' style='visibility:hidden;' id='doubleImage'></canvas>
+        <div id="my_camera" style="width:320px; height:240px; visibility: hidden;"></div>
+        <canvas id="viewport"></canvas>
     </body>
 </html>
