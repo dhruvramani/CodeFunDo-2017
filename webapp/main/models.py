@@ -15,4 +15,4 @@ class Image(models.Model):
     warehouse = models.CharField(max_length=200)
 
     def __str__(self):
-        return str(self.id_)+ " " + str(self.name)
+        return str(self.Iid)+ " " + str(self.name)
