@@ -6,3 +6,13 @@ class File(models.Model):
 
     def __str__(self):
         return self.name
+
+class Image(models.Model):
+    id_ = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=30)
+    imagepath = models.CharField(max_length=255)
+    weight = models.DecimalField(max_digits=4, decimal_places=4, default="")
+    warehouse = models.CharField(max_length=200)
+
+    def __str__(self):
+        return str(self.id_)+ " " + str(self.name)

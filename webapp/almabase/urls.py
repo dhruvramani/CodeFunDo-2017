@@ -20,4 +20,5 @@ import main.views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', main.views.index, name='index'),
+    url(r'ar/', main.views.ar, name='ar')
 ]
