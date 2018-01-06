@@ -27,7 +27,7 @@ def index(request):
         imageObj.name = imageName
         imageObj.weight = weigh
         imageObj.save()
-        if(request.POST['filename'] == "ar")
+        if(request.POST['filename'] == "ar"):
             return render(request, 'main/ar.html', {"weight" : "%.2f" % weigh})
         return render(request,'main/results.html', {"weight" : "%.2f" % weigh})
 
