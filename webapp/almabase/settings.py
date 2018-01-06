@@ -31,7 +31,8 @@ SECRET_KEY = '1tz9e=tis&=+-2@7xdpobu(@5+ps*(0ofv9bd5$pqva)j2z^k='
 DEBUG = True
 
 ALLOWED_HOSTS = [u'52.187.29.171']
-
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Application definition
 

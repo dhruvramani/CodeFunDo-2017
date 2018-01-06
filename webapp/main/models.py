@@ -8,7 +8,7 @@ class File(models.Model):
         return self.name
 
 class Image(models.Model):
-    id_ = models.AutoField(primary_key=True)
+    Iid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
     imagepath = models.CharField(max_length=255)
     weight = models.DecimalField(max_digits=4, decimal_places=4, default="")
