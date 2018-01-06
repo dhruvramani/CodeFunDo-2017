@@ -16,11 +16,13 @@
                     $("#file1").trigger("click");
                     element.setAttribute("value", "Click Again!")
                     window.count = 1;
+                    return ;
                 } else if(count == 1)
                 {
                     $("#file2").trigger("click");
                     element.setAttribute("value", "Click One Last Time!");
                     window.count = 2;
+                    return ;
                 } else {
                     $("#main_form").submit();
                 }
@@ -31,9 +33,7 @@
     <body style='margin : 0px; overflow: hidden;'>
         <a-scene embedded arjs  onclick="get_weight();">
             <a-marker preset="hiro">
-                <a-box position='0 0.5 0' material='color: white;'>
-                    <a-text value="Click Me!" color="black" id="ar_text"></a-text> 
-                </a-box>
+                <a-text value="Click Me!" color="black" id="ar_text"></a-text> 
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
