@@ -1,6 +1,6 @@
 import os
 from .models import File, Image
-from .weights import weight
+from .weight2 import weight
 from django.http import HttpResponse
 from django.views.static import serve
 from django.shortcuts import render, redirect, get_object_or_404
