@@ -7,10 +7,11 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
         <script type="text/javascript">
-            var textEl = document.querySelector('a-text');
-            boxEl.addEventListener('mouseenter', function () {
-                boxEl.setAttribute('visible', 'false');
-            });
+            function get_weight() {
+                var element = document.getElementById("ar_text");
+                element.setAttribute("visible", "false");
+                alert("done");
+            }
             /*
             function takeScreenshot() {
                 var w = window.open('', '');
@@ -54,10 +55,10 @@
         </script> 
     </head>
 
-    <body style='margin : 0px; overflow: hidden;'>
+    <body style='margin : 0px; overflow: hidden;' onclick="get_weight();">
         <a-scene embedded arjs>
             <a-marker preset="hiro">
-                <a-text value="10 Kg" color="black" scale="1.5 1.5 1.5" ></a-text> 
+                <a-text value="10 Kg" color="black" scale="1.5 1.5 1.5" id="ar_text"></a-text> 
                 <!-- <a-box position='0 0.5 0' material='color: black;'></a-box> -->
             </a-marker>
             <a-entity camera></a-entity>
