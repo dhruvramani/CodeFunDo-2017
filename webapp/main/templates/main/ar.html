@@ -32,28 +32,30 @@
             {
                 alert("screenshot");
             
-                    alert("snap");
                     var canvas = document.getElementById('viewport'),
                     context = canvas.getContext('2d');
                     context.drawImage(video, 0, 0, 300, 300, 0, 0, 300, 300);
-                    
+                    alert("canvas done");
                     var url = canvas.toDataURL();
+                    alert("url done");
                     if(window.count == 0)
                     {
                         window.file1 = url;
                         window.count++;
+                        alert("count done");
                         return;
                     } else {
-                        alert("hello");
                         $.ajax({
                             url: "http://52.230.83.128",
                             type: "POST",
                             data: {file1 : file1, file2 : url},
                             processData: false,
                             contentType: false,
+
                         }).done(function(respond){
                             alert(respond);
                         });
+                        alert("ajax done");
                         window.file1 = null;
                         window.count = 0;
                     }
