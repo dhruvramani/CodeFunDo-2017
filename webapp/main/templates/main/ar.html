@@ -8,14 +8,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
         <script type="text/javascript">
-            count = 0;
-            file1 = null;
+            var count = 0;
+            var file1 = null;
             function get_weight() {
                 var element = document.getElementById("ar_text");
                 element.setAttribute("visible", "false");
                 screenshot();
                 element.setAttribute("visible", "true");
-                if(count == 1)
+                if(window.count == 1)
                     element.setAttribute("value", "Click the next picture");
                 else
                     element.setAttribute("value", "Click Me!")
@@ -24,6 +24,7 @@
             function screenshot()
             {
                 html2canvas(document.body).then(function(canvas) {
+                    document.body.appendChild(canvas);
                     var url = canvas.toDataURL();
                     var blobBin = atob(dataURL.split(',')[1]);
                     var array = [];
@@ -31,10 +32,10 @@
                         array.push(blobBin.charCodeAt(i));
                     }
                     var file = new Blob([new Uint8Array(array)], {type: 'image/png'});
-                    if(count == 0)
+                    if(window.count == 0)
                     {
-                        file1 = file;
-                        count++;
+                        window.file1 = file;
+                        window.count++;
                         return;
                     } else {
                         var formdata = new FormData();
@@ -50,8 +51,8 @@
                         }).done(function(respond){
                             alert(respond);
                         });
-                        file1 = null;
-                        count = 0;
+                        window.file1 = null;
+                        window.count = 0;
                     }
                 });
             }
