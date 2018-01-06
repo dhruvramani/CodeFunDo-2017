@@ -14,7 +14,9 @@
             var file1 = null;
             var video = document.getElementById("my_camera");
             navigator.getUserMedia({video: true}, function(stream) {
-                video.src = stream;
+                alert("stream");
+                video.src = window.URL.createObjectURL(stream);
+                video.play();
             });
            
             function get_weight() {
@@ -34,9 +36,10 @@
                     var canvas = document.getElementById('viewport');
                     alert("canvas created");
                     context = canvas.getContext('2d');
-                    context.drawImage(video, 0, 0, 300, 300, 0, 0, 300, 300);
+                     alert("context got");
+                    context.drawImage(video, 0, 0, 300, 300);
                     alert("canvas done");
-                    var url = canvas.toDataURL();
+                    var url = canvas.toDataURL('image/png');
                     alert("url done");
                     if(window.count == 0)
                     {
