@@ -5,6 +5,7 @@
         <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
         <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <!-- 
         <script type="text/javascript">
             function takeScreenshot() {
                 var w = window.open('', '');
@@ -44,14 +45,17 @@
                     };
                     images[src].src = sources[src];
                 }
-            }
-        </script>
+            } 
+        </script> -->
     </head>
 
     <body style='margin : 0px; overflow: hidden;'>
-        <a-marker preset="hiro">
-            <a-text value="10 Kg" opacity="0.8" font="Lato, 'Helvetica Neue', Helvetica, Arial", color="black"></a-text>
-        </a-marker>
+        <a-scene embedded arjs>
+            <a-marker preset="hiro">
+                <a-text value="10 Kg" opacity="0.8" font="Lato, 'Helvetica Neue', Helvetica, Arial", color="black"></a-text>
+            </a-marker>
+            <a-entity camera></a-entity>
+        </a-scene>
         <canvas width='640' height='480' style='visibility:hidden;' id='doubleImage'></canvas>
     </body>
 </html>

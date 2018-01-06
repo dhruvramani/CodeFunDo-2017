@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname((os.path.dirname(os.path.abspath(__file__))))
 def index(request):
     if request.method == 'POST':
         num_files, paths = 2, list()
-        imageName = string()
+        imageName = ""
         for i in range(1, num_files + 1):
             fileObj = File()
             fileObj.file = request.FILES.get('file{}'.format(i) , False)
