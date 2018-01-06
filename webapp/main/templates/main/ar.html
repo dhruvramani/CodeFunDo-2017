@@ -12,7 +12,11 @@
             
             var count = 0;
             var file1 = null;
-            Webcam.attach($("#my_camera"));
+            var video = document.getElementById("my_camera");
+            navigator.getUserMedia({video: true}, function(stream) {
+                video.src = stream;
+            }
+           
             function get_weight() {
                 var element = document.getElementById("ar_text");
                 element.setAttribute("visible", "false");
@@ -27,15 +31,12 @@
             function screenshot()
             {
                 alert("screenshot");
-                Webcam.snap(function(data_url) {
+            
                     alert("snap");
                     var canvas = document.getElementById('viewport'),
                     context = canvas.getContext('2d');
-                    base_image = new Image();
-                    base_image.src = data_url;
-                    base_image.onload = function(){
-                            context.drawImage(base_image, base_image.width, base_image.height);
-                    }
+                    context.drawImage(video, 0, 0, 300, 300, 0, 0, 300, 300);
+                    
                     var url = canvas.toDataURL();
                     if(window.count == 0)
                     {
@@ -109,7 +110,7 @@
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
-        <div id="my_camera" style="visibility: hidden;"></div>
-        <canvas id="viewport"></canvas>
+        <video id="my_camera" style="visibility: hidden;"></video>
+        <canvas id="viewport" style="visibility: hidden;"></canvas>
     </body>
 </html>
