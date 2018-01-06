@@ -9,38 +9,31 @@
         <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> 
         <script src="https://raw.githubusercontent.com/jhuckaby/webcamjs/master/webcam.min.js"></script>
         <script type="text/javascript">
-            
             var count = 1;
-           
             function get_weight() {
                 var element = document.getElementById("ar_text");
-                if(window.count == 1)
-                {
-                    element.setAttribute("value", "Click Again!");
-                    window.count = 0;
-                }
-                else if(count == 0){
-                    element.setAttribute("value", "Click Me!")
+                if(count == 0){
+                    $("#file1").trigger("click");
+                    element.setAttribute("value", "Click Again!")
                     window.count = 1;
+                } else if(count == 1)
+                {
+                    $("#file2").trigger("click");
+                    element.setAttribute("value", "Click One Last Time!");
+                    window.count = 2;
+                } else {
+                    $("#main_form").submit();
                 }
-                getImage();
             }
-            
-            function getImage()
-            {
-                $("#file1").trigger("click");
-                $("#file1").trigger("click");
-                $("#main_form").submit();
-            }
-
         </script> 
     </head>
 
     <body style='margin : 0px; overflow: hidden;'>
         <a-scene embedded arjs  onclick="get_weight();">
             <a-marker preset="hiro">
-                <a-text value="Click Me!." color="black" id="ar_text"></a-text> 
-                <!-- <a-box position='0 0.5 0' material='color: black;'></a-box> -->
+                <a-box position='0 0.5 0' material='color: white;'>
+                    <a-text value="Click Me!" color="black" id="ar_text"></a-text> 
+                </a-box>
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
