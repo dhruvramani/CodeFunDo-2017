@@ -1,5 +1,5 @@
 import os
-from .models import File
+from .models import File, Image
 from .weights import weight
 from django.http import HttpResponse
 from django.views.static import serve
