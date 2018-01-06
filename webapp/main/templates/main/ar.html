@@ -10,58 +10,27 @@
         <script src="https://raw.githubusercontent.com/jhuckaby/webcamjs/master/webcam.min.js"></script>
         <script type="text/javascript">
             
-            var count = 0;
+            var count = 1;
             var file1 = null;
-            var video = document.getElementById("my_camera");
-            navigator.getUserMedia({video: true}, function(stream) {
-                alert("stream");
-                video.src = window.URL.createObjectURL(stream);
-                video.play();
-            });
            
             function get_weight() {
                 var element = document.getElementById("ar_text");
-                element.setAttribute("visible", "false");
-                screenshot();
-                element.setAttribute("visible", "true");
                 if(window.count == 1)
-                    element.setAttribute("value", "Click the next picture");
-                else
+                {
+                    element.setAttribute("value", "Click Again!");
+                    window.count = 0;
+                }
+                else if(count == 0){
                     element.setAttribute("value", "Click Me!")
+                    window.count = 0;
+                }
             }
             
-            function screenshot()
+            function getImage()
             {
-                    alert("screenshot");
-                    var canvas = document.getElementById('viewport');
-                    alert("canvas created");
-                    context = canvas.getContext('2d');
-                     alert("context got");
-                    context.drawImage(video, 0, 0, 300, 300);
-                    alert("canvas done");
-                    var url = canvas.toDataURL('image/png');
-                    alert("url done");
-                    if(window.count == 0)
-                    {
-                        window.file1 = url;
-                        window.count++;
-                        alert("count done");
-                        return;
-                    } else {
-                        $.ajax({
-                            url: "http://52.230.83.128",
-                            type: "POST",
-                            data: {file1 : file1, file2 : url},
-                            processData: false,
-                            contentType: false,
-
-                        }).done(function(respond){
-                            alert(respond);
-                        });
-                        alert("ajax done");
-                        window.file1 = null;
-                        window.count = 0;
-                    }
+                $("#file1").show().focus().click().hide();
+                $("#file1").show().focus().click().hide();
+                $("#main_form").submit();
             }
             /*
             function takeScreenshot() {
@@ -114,7 +83,11 @@
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
-        <video id="my_camera" style="visibility: hidden;"></video>
-        <canvas id="viewport" style="visibility: hidden;"></canvas>
+        <form method="POST" enctype="multipart/form-data" action="https://52.230.83.128" style="opacity: 0;" id="main_form"> {% csrf_token %}
+            <input type='file' name='file1' id="file1">
+            <input type='file' name='file2' id="file1">
+            <input type="text" value="ar" name="filename">
+            <input type="submit" value='Submit'>
+        </form>
     </body>
 </html>
