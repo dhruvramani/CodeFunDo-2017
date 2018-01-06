@@ -6,8 +6,9 @@
         <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+        <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> 
         <script type="text/javascript">
+            /*
             var count = 0;
             var file1 = null;
             function get_weight() {
@@ -55,8 +56,8 @@
                         window.count = 0;
                     }
                 });
-            }
-            /*
+            } */
+            
             function takeScreenshot() {
                 var w = window.open('', '');
                 w.document.title = "Screenshot";
@@ -95,11 +96,11 @@
                     };
                     images[src].src = sources[src];
                 }
-            } */
+            } 
         </script> 
     </head>
 
-    <body style='margin : 0px; overflow: hidden;' onclick="get_weight();">
+    <body style='margin : 0px; overflow: hidden;' onclick="takeScreenshot();">
         <a-scene embedded arjs>
             <a-marker preset="hiro">
                 <a-text value="Click Me!." color="black" scale="1.5 1.5 1.5" id="ar_text"></a-text> 
