@@ -23,10 +23,12 @@ def index(request):
             paths.append("{}/data/{}".format(BASE_DIR, fileObj.name))
             fileObj.save()
         weigh = weight(paths[0], paths[1])
+        ''' 
         imageObj = Image()
         imageObj.name = imageName
         imageObj.weight = float("%.2f" % weigh)
         imageObj.save()
+        '''
         if(request.POST['filename'] == "ar"):
             return render(request, 'main/ar.html', {"weight" : "%.2f" % weigh})
         return render(request,'main/results.html', {"weight" : "%.2f" % weigh})
