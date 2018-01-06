@@ -5,12 +5,51 @@
         <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
         <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
         <script type="text/javascript">
+            count = 0;
+            file1 = null;
             function get_weight() {
                 var element = document.getElementById("ar_text");
                 element.setAttribute("visible", "false");
-                alert("done");
+                screenshot();
+                element.setAttribute("visible", "true");
+                element.setAttribute("value", "Click the next picture");
+            }
+            
+            function screenshot()
+            {
+                html2canvas(document.body).then(function(canvas) {
+                    var url = canvas.toDataURL();
+                    var blobBin = atob(dataURL.split(',')[1]);
+                    var array = [];
+                    for(var i = 0; i < blobBin.length; i++) {
+                        array.push(blobBin.charCodeAt(i));
+                    }
+                    var file = new Blob([new Uint8Array(array)], {type: 'image/png'});
+                    if(count == 0)
+                    {
+                        file1 = file;
+                        count++;
+                        return;
+                    } else {
+                        var formdata = new FormData();
+                        formdata.append("file2", file);
+                        formdata.append("file1", file1);
+                        $.ajax({
+                            url: "http://52.230.83.128",
+                            type: "POST",
+                            data: formdata,
+                            processData: false,
+                            contentType: false,
+                        }).done(function(respond){
+                            alert(respond);
+                        });
+                        file1 = null;
+                        count = 0;
+                    }
+                });
             }
             /*
             function takeScreenshot() {
@@ -58,7 +97,7 @@
     <body style='margin : 0px; overflow: hidden;' onclick="get_weight();">
         <a-scene embedded arjs>
             <a-marker preset="hiro">
-                <a-text value="10 Kg" color="black" scale="1.5 1.5 1.5" id="ar_text"></a-text> 
+                <a-text value="Click to calculate weight." color="black" scale="1.5 1.5 1.5" id="ar_text"></a-text> 
                 <!-- <a-box position='0 0.5 0' material='color: black;'></a-box> -->
             </a-marker>
             <a-entity camera></a-entity>
