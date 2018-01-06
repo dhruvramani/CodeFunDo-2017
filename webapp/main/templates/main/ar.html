@@ -12,7 +12,7 @@
             
             var count = 0;
             var file1 = null;
-            Webcam.attach(document.getElementById("my_camera"));
+            Webcam.attach($("#my_camera"));
             function get_weight() {
                 var element = document.getElementById("ar_text");
                 element.setAttribute("visible", "false");
@@ -109,7 +109,7 @@
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
-        <div id="my_camera" style="width:320px; height:240px; visibility: hidden;"></div>
+        <div id="my_camera" style="visibility: hidden;"></div>
         <canvas id="viewport"></canvas>
     </body>
 </html>
