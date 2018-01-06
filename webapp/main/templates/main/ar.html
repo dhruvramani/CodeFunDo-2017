@@ -41,7 +41,11 @@
         </div>
         <a-scene embedded arjs  onclick="get_weight();">
             <a-marker preset="hiro">
-                <a-text value="Click Me!" color="black" id="ar_text"></a-text> 
+                {% if weight is defined %}
+                    <a-text value="{{ weight }}" color="#08110b" id="ar_text"></a-text> 
+                {% else %}
+                    <a-text value="Click Me!" color="#08110b" id="ar_text"></a-text> 
+                {% endif %}
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
