@@ -9,7 +9,7 @@
         <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> 
         <script src="https://raw.githubusercontent.com/jhuckaby/webcamjs/master/webcam.min.js"></script>
         <script type="text/javascript">
-            var count = 1;
+            var count = 0;
             function get_weight() {
                 var element = document.getElementById("ar_text");
                 if(count == 0){
@@ -31,12 +31,6 @@
     </head>
 
     <body style='margin : 0px; overflow: hidden;'>
-        <a-scene embedded arjs  onclick="get_weight();">
-            <a-marker preset="hiro">
-                <a-text value="Click Me!" color="black" id="ar_text"></a-text> 
-            </a-marker>
-            <a-entity camera></a-entity>
-        </a-scene>
         <div style="width: 0px; height: 0px; opacity: 0;">
             <form method="POST" enctype="multipart/form-data" action="https://52.230.83.128" id="main_form"> {% csrf_token %}
                 <input type='file' name='file1' id="file1">
@@ -45,5 +39,11 @@
                 <input type="submit" value='Submit'>
             </form>
         </div>
+        <a-scene embedded arjs  onclick="get_weight();">
+            <a-marker preset="hiro">
+                <a-text value="Click Me!" color="black" id="ar_text"></a-text> 
+            </a-marker>
+            <a-entity camera></a-entity>
+        </a-scene>
     </body>
 </html>
