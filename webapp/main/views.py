@@ -36,4 +36,4 @@ def index(request):
 
 def ar(request):
     if(request.method == 'GET'):
-        return render(request, 'main/ar.html', None)
+        return render(request, 'main/ar.html', {"weight" : "Click Me!")
