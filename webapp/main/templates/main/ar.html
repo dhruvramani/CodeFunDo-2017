@@ -15,7 +15,10 @@
                 element.setAttribute("visible", "false");
                 screenshot();
                 element.setAttribute("visible", "true");
-                element.setAttribute("value", "Click the next picture");
+                if(count == 1)
+                    element.setAttribute("value", "Click the next picture");
+                else
+                    element.setAttribute("value", "Click Me!")
             }
             
             function screenshot()
@@ -37,6 +40,7 @@
                         var formdata = new FormData();
                         formdata.append("file2", file);
                         formdata.append("file1", file1);
+                        alert("hello");
                         $.ajax({
                             url: "http://52.230.83.128",
                             type: "POST",
@@ -97,7 +101,7 @@
     <body style='margin : 0px; overflow: hidden;' onclick="get_weight();">
         <a-scene embedded arjs>
             <a-marker preset="hiro">
-                <a-text value="Click to calculate weight." color="black" scale="1.5 1.5 1.5" id="ar_text"></a-text> 
+                <a-text value="Click Me!." color="black" scale="1.5 1.5 1.5" id="ar_text"></a-text> 
                 <!-- <a-box position='0 0.5 0' material='color: black;'></a-box> -->
             </a-marker>
             <a-entity camera></a-entity>
