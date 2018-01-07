@@ -11,7 +11,7 @@ class Image(models.Model):
     Iid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
     imagepath = models.CharField(max_length=255)
-    weight = models.DecimalField(max_digits=4, decimal_places=4, default="")
+    weight = models.CharField(max_length=5)
     warehouse = models.CharField(max_length=200)
 
     def __str__(self):
