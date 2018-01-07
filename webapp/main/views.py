@@ -1,6 +1,5 @@
 import os
 from .models import File, Image
-from .weight2 import weight
 from django.http import HttpResponse
 from django.views.static import serve
 from django.shortcuts import render, redirect, get_object_or_404
@@ -22,6 +21,10 @@ def index(request):
                 imageName += fileObj.name
             paths.append("{}/data/{}".format(BASE_DIR, fileObj.name))
             fileObj.save()
+        if(request.POST['filename'] == "ar"):
+            from .weight2 import weight
+        else:
+            from .weights import weight
         weigh = weight(paths[0], paths[1])
         ''' 
         imageObj = Image()
